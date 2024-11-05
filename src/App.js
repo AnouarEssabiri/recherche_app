@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ChercheBar from "./ChercheBar";
 import ResultatList from "./ResultatList";
+
 const list = [
   { nom: "banane", type: "fruit" },
   { nom: "orange", type: "fruit" },
@@ -13,23 +14,24 @@ const list = [
   { nom: "navet", type: "legume" },
   { nom: "poivron", type: "legume" },
 ];
+
 export default function App() {
   const [type, setType] = useState("");
   const [resultas, setResultas] = useState([]);
+
   function onChercheSubmitApp(type) {
     setType(type);
-    setResultas(list.filter((item) => item.type.toUpperCase() == type));
+    setResultas(list.filter((item) => item.type.toUpperCase() === type));
   }
+
   return (
-    <div className="App">
-      <h1>Composant App</h1>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-8">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">Composant App</h1>
       <ChercheBar onChercheSubmit={onChercheSubmitApp} />
-      <div>
+      <div className="mt-4 text-lg text-gray-700">
         <p>
-          le type:
-          <span style={{ color: "rgb(36,44,33)", fontWeight: "bold" }}>
-            {type}
-          </span>
+          Le type:{" "}
+          <span className="text-blue-600 font-semibold">{type}</span>
         </p>
       </div>
       <ResultatList resultats={resultas} />
