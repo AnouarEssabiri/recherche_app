@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useState } from "react";
+import ChercheBar from "./ChercheBar";
+import ResultatList from "./ResultatList";
+const list = [
+  { nom: "banane", type: "fruit" },
+  { nom: "orange", type: "fruit" },
+  { nom: "pomme", type: "fruit" },
+  { nom: "raisins", type: "fruit" },
+  { nom: "kiwi", type: "fruit" },
+  { nom: "tomate", type: "legume" },
+  { nom: "carotte", type: "legume" },
+  { nom: "pomme de terre", type: "legume" },
+  { nom: "navet", type: "legume" },
+  { nom: "poivron", type: "legume" },
+];
+export default function App() {
+  const [type, setType] = useState("");
+  const [resultas, setResultas] = useState([]);
+  function onChercheSubmitApp(type) {
+    setType(type);
+    setResultas(list.filter((item) => item.type.toUpperCase() == type));
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <h1>Composant App</h1>
+      <ChercheBar onChercheSubmit={onChercheSubmitApp} />
+      <div>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          le type:
+          <span style={{ color: "rgb(36,44,33)", fontWeight: "bold" }}>
+            {type}
+          </span>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
+      <ResultatList resultats={resultas} />
     </div>
   );
 }
-
-export default App;
